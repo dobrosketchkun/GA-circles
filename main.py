@@ -21,7 +21,7 @@ ROUND_TIME = 10
 WALL = '#'
 BALL = "B"
 FINISH = 'F'
-
+BALL_IMAGE_OPTION = 'ball'
 
 
 
@@ -259,7 +259,10 @@ def length_testing(testing_list, length):
     """
     if len(testing_list) < length:
         while len(testing_list) < length:
-            testing_list.append(gene_gen(random.randint(5,20)))
+            # Добавляем случаный ген из testing_list
+            testing_list.append(testing_list[random.randint(0, len(testing_list)-1)])
+            # Добавляем новый случайный ген
+            #testing_list.append(gene_gen(random.randint(5,20)))
         else:
             return testing_list
 
@@ -286,15 +289,21 @@ class Ball(pygame.sprite.Sprite):
     def __init__(self, raw_gene, *groups):
         super(Ball, self).__init__(*groups)
         self.done = 0
+        if BALL_IMAGE_OPTION == 'random':
 
-        self.color = RGB_gene_gen()
-        (R,G,B) = int(self.color[0:8],2), int(self.color[9:17],2), int(self.color[18:26],2)
-        self.file_name = '!' + hashlib.md5(str((R,G,B))).hexdigest() + '.ball'
-        circle_img(32,self.file_name,(R,G,B))
+            self.color = RGB_gene_gen()
+            (R,G,B) = int(self.color[0:8],2), int(self.color[9:17],2), int(self.color[18:26],2)
+            self.file_name = '!' + hashlib.md5(str((R,G,B))).hexdigest() + '.ball'
+            circle_img(32,self.file_name,(R,G,B))
 
-        self.image = pygame.image.load(self.file_name)
+            self.image = pygame.image.load(self.file_name)
 
-        self.rect = pygame.rect.Rect(find_coor(BALL)[0], self.image.get_size())
+            self.rect = pygame.rect.Rect(find_coor(BALL)[0], self.image.get_size())
+        if BALL_IMAGE_OPTION == 'ball':
+            self.image = pygame.image.load('ball.png')
+
+            self.rect = pygame.rect.Rect(find_coor(BALL)[0], self.image.get_size())
+
         #self.raw_gene = gene_gen(random.randint(5,20))
         self.raw_gene = raw_gene
         self.dir_list = dir_gene_dec(self.raw_gene)
@@ -394,6 +403,7 @@ class Finish(pygame.sprite.Sprite):
 class Game(object):
     def __init__(self, raw_gene):
         self.raw_gene = raw_gene
+        self.quit = None
 
     def main(self, screen):
         clock = pygame.time.Clock()
@@ -434,13 +444,13 @@ class Game(object):
             self.d_clock = self.clock2 - self.clock1
 
             if self.d_clock > ROUND_TIME:
-                print 'Too late!'
+                print 'Too late!', self.ball.dis_to_fin
                 #print self.ball.dis_to_fin
                 self.quit = 1
                 break
 
             if self.ball.done:
-                print "Tah-dah!"
+                print "Tah-dah!", self.d_clock
                 #print self.d_clock
                 self.quit = 1
                 break
@@ -457,7 +467,7 @@ if __name__ == '__main__':
         raw_gene = gene_gen(random.randint(5,20))
         list_of_games.append(Game(raw_gene))
 
-    generations = 10 # количество поколений
+    generations = 50 # количество поколений
     for i in range(generations):
         print 'GENERATION', i
         list_of_scores = []
@@ -465,6 +475,7 @@ if __name__ == '__main__':
 
         for g in list_of_games:
             g.main(screen)
+
             if g.quit:
                 list_of_scores.append([g.d_clock, g.ball.dis_to_fin])
                 list_of_genes.append(g.ball.raw_gene)
