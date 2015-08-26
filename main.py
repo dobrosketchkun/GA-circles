@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import pygame, sys
-import tmx
 import random, hashlib
 import Image, ImageDraw
 import time
@@ -134,7 +133,7 @@ class Ball(pygame.sprite.Sprite):
 
         self.color = RGB_gene_gen()
         (R,G,B) = int(self.color[0:8],2), int(self.color[9:17],2), int(self.color[18:26],2)
-        self.file_name = '!' + hashlib.md5(str((R,G,B))).hexdigest() + '.png'
+        self.file_name = '!' + hashlib.md5(str((R,G,B))).hexdigest() + '.ball'
         circle_img(32,self.file_name,(R,G,B))
 
         self.image = pygame.image.load(self.file_name)
