@@ -240,6 +240,7 @@ def new_generation(gene_list):
     new_gen = []
     for i in paires:
         new_gen.append(cross(i[0],i[1]))
+##    return new_gen
 
     really_new_gene = []
 
@@ -250,6 +251,28 @@ def new_generation(gene_list):
 
 #####################################################################################
 
+def length_testing(testing_list, length):
+    """
+    Проверяет длину листа новых генов. Если она меньше, чем число особей в
+    популяции, то добавляет рандомные гены, если больше, то убирает с конца
+    нужное количество. При равности длин возвращает лист неизменным.
+    """
+    if len(testing_list) < length:
+        while len(testing_list) < length:
+            testing_list.append(gene_gen(random.randint(5,20)))
+        else:
+            return testing_list
+
+    if len(t) > length:
+        while len(testing_list) > length:
+            testing_list.remove(testing_list[-1])
+        else:
+            return testing_list
+
+    else:
+        return testing_list
+
+#####################################################################################
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #
 #           СЕКТОР КЛАССОВ
@@ -260,7 +283,7 @@ def new_generation(gene_list):
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, *groups):
+    def __init__(self, raw_gene, *groups):
         super(Ball, self).__init__(*groups)
         self.done = 0
 
@@ -272,10 +295,11 @@ class Ball(pygame.sprite.Sprite):
         self.image = pygame.image.load(self.file_name)
 
         self.rect = pygame.rect.Rect(find_coor(BALL)[0], self.image.get_size())
-        self.raw_gene = gene_gen(random.randint(5,20))
+        #self.raw_gene = gene_gen(random.randint(5,20))
+        self.raw_gene = raw_gene
         self.dir_list = dir_gene_dec(self.raw_gene)
 
-        print self.dir_list
+        #print self.dir_list
 
         self.dis_to_fin = None
 ##        [['down', 40], ['down', 28], ['up', 37], ['down', 44], ['left', 2],['up', 20],['down', 40],['left', 20]]]
@@ -368,6 +392,9 @@ class Finish(pygame.sprite.Sprite):
 
 
 class Game(object):
+    def __init__(self, raw_gene):
+        self.raw_gene = raw_gene
+
     def main(self, screen):
         clock = pygame.time.Clock()
 
@@ -377,7 +404,7 @@ class Game(object):
         self.fins = pygame.sprite.Group()
 
         self.wall = [Wall(i,self.walls) for i in find_coor(WALL)]
-        self.ball = Ball(self.sprites)
+        self.ball = Ball(self.raw_gene, self.sprites)
         self.finish = Finish(find_coor(FINISH)[0], self.fins)
 
         self.clock1 = time.time()
@@ -408,13 +435,13 @@ class Game(object):
 
             if self.d_clock > ROUND_TIME:
                 print 'Too late!'
-                print self.ball.dis_to_fin
+                #print self.ball.dis_to_fin
                 self.quit = 1
                 break
 
             if self.ball.done:
                 print "Tah-dah!"
-                print self.d_clock
+                #print self.d_clock
                 self.quit = 1
                 break
 
@@ -425,18 +452,29 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode(map_size())
 
     list_of_games = []
-    list_of_scores = []
-    list_of_genes = []
+    individuals  = 15
+    for i in range(individuals): # количество особей в популяции
+        raw_gene = gene_gen(random.randint(5,20))
+        list_of_games.append(Game(raw_gene))
 
-    for i in range(15): # количество особей в популяции
-        list_of_games.append(Game())
-    for g in list_of_games:
-        g.main(screen)
-        if g.quit:
-            list_of_scores.append([g.d_clock, g.ball.dis_to_fin])
-            list_of_genes.append(g.ball.raw_gene)
+    generations = 10 # количество поколений
+    for i in range(generations):
+        print 'GENERATION', i
+        list_of_scores = []
+        list_of_genes = []
 
-    print list_of_scores
-    print list_of_genes
+        for g in list_of_games:
+            g.main(screen)
+            if g.quit:
+                list_of_scores.append([g.d_clock, g.ball.dis_to_fin])
+                list_of_genes.append(g.ball.raw_gene)
+
+        best_genes = find_best(list_of_scores,list_of_genes)
+        new_gen = new_generation(best_genes) # потомки лучших генов
+        really_new_gen = length_testing(new_gen, individuals) # новое поколение, сверной длиной листа, равного количеству особоей в популяции
+        for g in range(len(list_of_games)):
+            list_of_games[g].raw_gene = really_new_gen[g]
+
+
     pygame.quit()
     sys.exit()
