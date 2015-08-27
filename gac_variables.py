@@ -15,4 +15,5 @@ ROUND_TIME = 10
 WALL = '#'
 BALL = "B"
 FINISH = 'F'
-BALL_IMAGE_OPTION = 'ball'
+#BALL_IMAGE_OPTION = 'ball'
+BALL_IMAGE_OPTION = 'random'

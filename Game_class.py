@@ -10,10 +10,13 @@
 #-------------------------------------------------------------------------------
 import pygame
 import time
+import os
 from gac_functions import *
 from gac_variables import *
 from Ball_class import *
 from sub_classes import *
+
+path = os.path.dirname(__file__) + '\\img\\'
 
 class Game(object):
     def __init__(self, raw_gene):
@@ -23,7 +26,7 @@ class Game(object):
     def main(self, screen):
         clock = pygame.time.Clock()
 
-        background = pygame.image.load('background.png')
+        background = pygame.image.load(path + 'background.png')
         self.sprites = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
         self.fins = pygame.sprite.Group()

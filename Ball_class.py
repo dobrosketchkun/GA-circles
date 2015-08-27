@@ -13,6 +13,8 @@ from gac_functions import *
 from gac_variables import *
 import Image, ImageDraw
 import pygame
+import os
+path = os.path.dirname(__file__) + '\\img\\'
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self, raw_gene, *groups):
@@ -22,14 +24,14 @@ class Ball(pygame.sprite.Sprite):
 
             self.color = RGB_gene_gen()
             (R,G,B) = int(self.color[0:8],2), int(self.color[9:17],2), int(self.color[18:26],2)
-            self.file_name = '!' + hashlib.md5(str((R,G,B))).hexdigest() + '.ball'
+            self.file_name = path + '!' + hashlib.md5(str((R,G,B))).hexdigest() + '.ball'
             circle_img(32,self.file_name,(R,G,B))
 
             self.image = pygame.image.load(self.file_name)
 
             self.rect = pygame.rect.Rect(find_coor(BALL)[0], self.image.get_size())
         if BALL_IMAGE_OPTION == 'ball':
-            self.image = pygame.image.load('ball.png')
+            self.image = pygame.image.load(path + 'ball.png')
 
             self.rect = pygame.rect.Rect(find_coor(BALL)[0], self.image.get_size())
 
