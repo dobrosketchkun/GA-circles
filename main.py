@@ -15,7 +15,7 @@ from operator import itemgetter
 #
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-MAP_FILE = 'map.map'
+MAP_FILE = 'map2.map'
 WALL_BLOCK_SIZE = 32
 ROUND_TIME = 10
 WALL = '#'
