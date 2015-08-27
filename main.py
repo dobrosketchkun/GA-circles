@@ -1,4 +1,13 @@
 # -*- coding: utf-8 -*-
+#-------------------------------------------------------------------------------
+# Name:        GA-cricles
+# Purpose:     educational
+#
+# Author:      Wisketchy Dobrov
+#
+# Copyright:   (c)2015
+# Licence:     The BSD 3-Clause License
+#-------------------------------------------------------------------------------
 
 import pygame, sys
 import random, hashlib
