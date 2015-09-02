@@ -9,12 +9,16 @@
 # Licence:     The BSD 3-Clause License
 #-------------------------------------------------------------------------------
 
-from gac_functions import *
+from Genetics import *
+from Adopters import *
 from gac_variables import *
 import Image, ImageDraw
 import pygame
 import os
-path = os.path.dirname(__file__) + '\\img\\'
+from gac_variables import path
+##path = sys.path.append(os.path.join(sys.path[0], '\img'))
+
+path = path + '\\Resources\\img\\'
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self, raw_gene, *groups):

@@ -12,10 +12,11 @@
 import pygame, sys
 import random
 from gac_variables import *
-from gac_functions import *
-from Ball_class import *
-from sub_classes import *
+from Genetics import *
+#from other_functions import *
+from Adopters import *
 from Game_class import *
+from Model import *
 
 
 

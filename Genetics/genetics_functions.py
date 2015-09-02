@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #-------------------------------------------------------------------------------
-# Name:        GA-cricles/functions
+# Name:        GA-cricles/genetic functions
 # Purpose:     educational
 #
 # Author:      Wisketchy Dobrov
@@ -71,36 +71,6 @@ def dir_gene_dec(gene):
 
 #####################################################################################
 
-def find_coor(what):
-    """
-    Проходит по листу-карте и собирает координаты в формате[(x,y),(...),...]
-    """
-    with open(MAP_FILE) as f:
-        lines = f.read().splitlines()
-
-    some_map =  [[i] for i in lines]
-    block_size = WALL_BLOCK_SIZE
-    wall_coor_list = []  #
-    for row in range(len(some_map)):
-        for text in some_map[row]:
-            wall_row = []
-            for i in range(len(text)):
-                if text[i] == what:
-                    wall_row.append((i * block_size,  row * block_size))
-        wall_coor_list.append(wall_row)
-    return [item for sublist in wall_coor_list for item in sublist]
-
-#####################################################################################
-
-def map_size():
-    """
-    Выдаёт размер карты из расчёт элементов в ней и размера блока, в формате (x, y)
-    """
-    with open(MAP_FILE) as f:
-        lines = f.read().splitlines()
-    return ( max([len(i) for i in lines])*WALL_BLOCK_SIZE, len(lines)*WALL_BLOCK_SIZE)
-
-#####################################################################################
 
 def find_best(list_of_scores, genes):
     """

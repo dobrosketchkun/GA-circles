@@ -8,8 +8,11 @@
 # Copyright:   (c)2015
 # Licence:     The BSD 3-Clause License
 #-------------------------------------------------------------------------------
+import os
+path = os.path.dirname(__file__)
 
-MAP_FILE = 'map2.map'
+
+MAP_FILE = path + '\\Resources\\map2.map'
 WALL_BLOCK_SIZE = 32
 ROUND_TIME = 10
 WALL = '#'

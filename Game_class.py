@@ -11,12 +11,12 @@
 import pygame
 import time
 import os
-from gac_functions import *
+from Genetics import *
+from Adopters import *
 from gac_variables import *
-from Ball_class import *
-from sub_classes import *
+from Model import *
 
-path = os.path.dirname(__file__) + '\\img\\'
+path = os.path.dirname(__file__) + '\\Resources\\img\\'
 
 class Game(object):
     def __init__(self, raw_gene):
