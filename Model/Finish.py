@@ -11,7 +11,7 @@
 import pygame
 import sys
 import os
-from gac_variables import path
+from variables import path
 ##path = sys.path.append(os.path.join(sys.path[0], '\img'))
 
 path = path + '\\Resources\\img\\'

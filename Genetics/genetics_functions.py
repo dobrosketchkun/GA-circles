@@ -14,7 +14,7 @@ import re
 import math
 import Image, ImageDraw
 from operator import itemgetter
-from gac_variables import *
+from variables import *
 
 def circle_img(size, file_name, color):
     """

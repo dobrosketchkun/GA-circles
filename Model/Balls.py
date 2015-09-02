@@ -11,11 +11,12 @@
 
 from Genetics import *
 from Adopters import *
-from gac_variables import *
 import Image, ImageDraw
 import pygame
 import os
-from gac_variables import path
+
+from variables import path
+from variables import *
 ##path = sys.path.append(os.path.join(sys.path[0], '\img'))
 
 path = path + '\\Resources\\img\\'
