@@ -11,12 +11,10 @@
 
 import pygame, sys
 import random
-from variables import *
-from Genetics import *
-#from other_functions import *
-from Adopters import *
-from Game import *
-from Model import *
+from variables import MAP_FILE
+from Genetics import gene_gen, find_best, new_generation, length_testing
+from Adopters import map_size
+from Game import Game
 
 
 
@@ -26,12 +24,12 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode(map_size())
 
     list_of_games = []
-    individuals  = 15
+    individuals  = 4
     for i in range(individuals): # количество особей в популяции
         raw_gene = gene_gen(random.randint(5,20))
         list_of_games.append(Game(raw_gene))
 
-    generations = 50 # количество поколений
+    generations = 2 # количество поколений
     for i in range(generations):
         print 'GENERATION', i
         list_of_scores = []

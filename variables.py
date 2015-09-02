@@ -9,14 +9,15 @@
 # Licence:     The BSD 3-Clause License
 #-------------------------------------------------------------------------------
 import os
+
+
 path = os.path.dirname(__file__)
 
-
-MAP_FILE = path + '\\Resources\\maps\\map2.map'
+MAP_FILE = path + '\\Resources\\maps\\map.map'
 WALL_BLOCK_SIZE = 32
 ROUND_TIME = 10
 WALL = '#'
 BALL = "B"
 FINISH = 'F'
-#BALL_IMAGE_OPTION = 'ball'
-BALL_IMAGE_OPTION = 'random'
+BALL_IMAGE_OPTION = 'ball'
+#BALL_IMAGE_OPTION = 'random'

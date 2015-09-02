@@ -9,14 +9,14 @@
 # Licence:     The BSD 3-Clause License
 #-------------------------------------------------------------------------------
 
-from Genetics import *
-from Adopters import *
+
 import Image, ImageDraw
 import pygame
 import os
+from Genetics import RGB_gene_gen, dir_gene_dec
+from Adopters import find_coor
+from variables import path, BALL_IMAGE_OPTION, BALL
 
-from variables import path
-from variables import *
 ##path = sys.path.append(os.path.join(sys.path[0], '\img'))
 
 path = path + '\\Resources\\img\\'

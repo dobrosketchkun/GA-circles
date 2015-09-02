@@ -1,3 +1,3 @@
-from Balls import *
+from Ball import *
 from Finish import *
 from Wall import *

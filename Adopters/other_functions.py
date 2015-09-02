@@ -14,7 +14,7 @@ import re
 import math
 import Image, ImageDraw
 from operator import itemgetter
-from variables import *
+from variables import MAP_FILE, WALL_BLOCK_SIZE
 
 
 def find_coor(what):

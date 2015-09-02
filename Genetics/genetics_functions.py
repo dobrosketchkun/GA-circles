@@ -14,7 +14,7 @@ import re
 import math
 import Image, ImageDraw
 from operator import itemgetter
-from variables import *
+
 
 def circle_img(size, file_name, color):
     """
@@ -220,7 +220,7 @@ def length_testing(testing_list, length):
         else:
             return testing_list
 
-    if len(t) > length:
+    if len(testing_list) > length:
         while len(testing_list) > length:
             testing_list.remove(testing_list[-1])
         else:

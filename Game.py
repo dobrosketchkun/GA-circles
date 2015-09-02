@@ -11,10 +11,10 @@
 import pygame
 import time
 import os
-from Genetics import *
-from Adopters import *
-from gac_variables import *
-from Model import *
+import math
+from Adopters import find_coor
+from variables import path, WALL, FINISH, ROUND_TIME
+from Model import Wall, Finish, Ball
 
 path = os.path.dirname(__file__) + '\\Resources\\img\\'
 
