@@ -12,7 +12,7 @@ import os
 path = os.path.dirname(__file__)
 
 
-MAP_FILE = path + '\\Resources\\map2.map'
+MAP_FILE = path + '\\Resources\\maps\\map2.map'
 WALL_BLOCK_SIZE = 32
 ROUND_TIME = 10
 WALL = '#'
